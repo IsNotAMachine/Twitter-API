@@ -1,0 +1,28 @@
+"""
+1. List of all twitter followers
+2. select one at random
+3. tweet at them
+API are different ways to interact with services
+Need to input your own consumer_key, consumer_secret, access_token_key, and acces_token_secret for program to work
+"""
+
+import twitter
+import random
+
+
+api = twitter.Api(consumer_key='', consumer_secret='', access_token_key='', access_token_secret='')
+print(api.VerifyCredentials())
+
+followers = api.GetFollowers()
+print([u.name for u in followers])
+print(len(followers))
+
+
+#Picking followers at random
+randomIndex = random.randint(0,len(followers) - 1)
+randomFollower = followers[randomIndex]
+print(randomFollower.screen_name)
+
+tweet = "@{} You are the random follower of the day!".format(randomFollower.screen_name)
+api.PostUpdate(tweet)
+print("Thanks for tweeting")
